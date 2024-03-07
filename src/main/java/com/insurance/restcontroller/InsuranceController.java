@@ -8,6 +8,6 @@ public class InsuranceController {
 	
 @GetMapping("/getInsurance")
 	public String getMessage() {
-		return "Hello Welcome";
+		return "Hello Sandesh";
 	}
 }
