@@ -1,9 +1,12 @@
 package com.insurance.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.insurance.exception.PolicyNotFoundException;
+import com.insurance.model.Claim;
 import com.insurance.model.Policy;
 import com.insurance.repository.InsuranceRepository;
 import com.insurance.service.InsuranceService;
@@ -45,7 +48,13 @@ public class InsuranceServiceImpl implements InsuranceService {
 		
 	}
 
+	
 
+
+
+
+
+	
 	
 
 }

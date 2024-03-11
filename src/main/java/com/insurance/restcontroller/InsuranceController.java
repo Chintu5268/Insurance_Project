@@ -1,14 +1,21 @@
 package com.insurance.restcontroller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.insurance.model.Claim;
 import com.insurance.model.Policy;
+import com.insurance.service.ClaimService;
 import com.insurance.service.InsuranceService;
 
 @RestController
@@ -18,9 +25,11 @@ public class InsuranceController {
 	public String getMessage() {
 		return "Hello Sandesh";
 	}
-
-	@Autowired
+	
+// =============start====================================================
+	@Autowired(required = true)
 	private InsuranceService insuranceService;
+	
 
 	/*
 	 * Design Restful web service to add,update,get and delete operation for policy
@@ -49,5 +58,39 @@ public class InsuranceController {
 		insuranceService.deletePolicy(id);
 		
 	}
+//	
+	
+	
+	//-======================================================================
+	 @Autowired
+	private ClaimService claimService;
+	
+
+	
+	  @PostMapping("/addClaim")
+	    public ResponseEntity<Claim> addClaim(@RequestBody Claim claim) {
+	        Claim addedClaim = claimService.addClaim(claim);
+	        return ResponseEntity.status(HttpStatus.CREATED).body(addedClaim);
+	    }
+
+	  @GetMapping("/getClaim/{id}")
+	    public Claim getClaimById(@PathVariable("id") Integer id) {
+	        Claim  claim = claimService.getClaimById(id);
+			return  claim;
+
+	       
+	    }
+	  
+	    @PutMapping("/updateClaim")
+	    public Claim updateClaim( @RequestBody  Claim updateClaim) {
+	        Claim updated = claimService.updateClaim( updateClaim);      
+	        return updated;
+	    }
+	    
+	    @DeleteMapping("/deleteClaim/{id}")
+	    public void deleteClaim(@PathVariable("id") Integer id) {
+	    		claimService.deleteClaim(id);
+	    	
+	    }
 	
 }
